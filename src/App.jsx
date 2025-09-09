@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Web3Auth } from "@web3auth/modal";
-import { OpenloginAdapter } from "@web3auth/openlogin-adapter";
+import { CHAIN_NAMESPACES } from "@web3auth/base";
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
@@ -14,17 +14,17 @@ function App() {
   useEffect(() => {
     const init = async () => {
       try {
-        const openloginAdapter = new OpenloginAdapter({});
-        
         const web3authInstance = new Web3Auth({
           clientId: "BJssZCjnzWUIBZxl2Ma2ToAxC4ZiyW4CXvcjSSYIYaoc0RJMGKLCXIz0HrbXHi7Lio4NOyJyn5ltSHT0WI-qXIc", // ユーザー指定のclientId
-          web3AuthNetwork: "devnet", // devnetを利用
-          configureAdapterSettings: {
-            openloginAdapter: openloginAdapter
+          web3AuthNetwork: "sapphire_devnet", // v10では'sapphire_devnet'を使用
+          chainConfig: {
+            chainNamespace: CHAIN_NAMESPACES.EIP155,
+            chainId: "0x1", // Mainnet
+            rpcTarget: "https://rpc.ankr.com/eth",
           }
         });
         
-        await web3authInstance.initModal();
+        await web3authInstance.init();
         setWeb3auth(web3authInstance);
         setProvider(web3authInstance.provider);
         if (web3authInstance.provider) {
