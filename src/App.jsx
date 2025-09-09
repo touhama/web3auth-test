@@ -14,12 +14,16 @@ function App() {
   useEffect(() => {
     const init = async () => {
       try {
+        const openloginAdapter = new OpenloginAdapter({});
+        
         const web3authInstance = new Web3Auth({
           clientId: "BJssZCjnzWUIBZxl2Ma2ToAxC4ZiyW4CXvcjSSYIYaoc0RJMGKLCXIz0HrbXHi7Lio4NOyJyn5ltSHT0WI-qXIc", // ユーザー指定のclientId
           web3AuthNetwork: "devnet", // devnetを利用
+          configureAdapterSettings: {
+            openloginAdapter: openloginAdapter
+          }
         });
-        const openloginAdapter = new OpenloginAdapter({});
-        web3authInstance.configureAdapter(openloginAdapter);
+        
         await web3authInstance.initModal();
         setWeb3auth(web3authInstance);
         setProvider(web3authInstance.provider);
@@ -63,15 +67,7 @@ function App() {
           <img src={reactLogo} className="logo react" alt="React logo" />
         </a>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
+      <h1>Vite + React + Web3Auth</h1>
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
       </p>
