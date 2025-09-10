@@ -59,10 +59,6 @@ function App() {
 
   return (
     <>
-      <h1>Vite + React + Web3Auth</h1>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
       <div style={{ textAlign: "center", marginTop: 40 }}>
         <h1>Web3Auth + React クイックスタート</h1>
         {user ? (
